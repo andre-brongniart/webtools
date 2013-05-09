@@ -34,14 +34,83 @@
                         case "alltools":
 
                                 if ($hostin = $_GET['fieldin']) {
-
+                      
                                 $dnsoutput = shell_exec("host -a '$hostin'");
 
-                                echo "<pre><h1>DNS:</h1><br>
+				echo "<pre><h1>DNS:</h1><br>
+	
+				$dnsoutput<br></pre>";	
+	
+				$whoisoutput = shell_exec("whois '$hostin'");
 
-                                $dnsoutput<br></pre>";
+				echo "<pre><h1>WHOIS:</h1><br>
+			
+				$whoisoutput</pre>";
+							
+				$pingoutput = shell_exec("ping -c 10 '$hostin'");
 
+				echo "<pre><h1>Ping:</h1><br>
+
+				$pingoutput<br></pre>";
+
+				/*$emailtestoutput = shell_exec("telnet '$hostin' 25; EHLO spectroweb.com; VRFY );*/
+	
+				}		
+		
+				else { }
+				break;
+		
+			case "dns":
+
+				if ($hostin = $_GET['fieldin']) {
+ 
+			        $dnsoutput = shell_exec("host -a '$hostin'");
+  
+                                echo "<pre><h1>DNS:</h1><br/>
+ 
+                                $dnsoutput<br/></pre>";
+ 
+                                }
+ 
+                                else { }
+                                break;
+			
+			case "whois":
+					
+				if ($hostin = $_GET['fieldin']) {
+	
                                 $whoisoutput = shell_exec("whois '$hostin'");
 
-"webtools.php" 114L, 2703C                                                                                               1,1           Top
+                                echo "<pre><h1>WHOIS:</h1><br>
+
+                                $whoisoutput</pre>";
+
+				}				
+
+				else { }
+                                break;
+
+			case "ping":
+
+				if ($hostin = $_GET['fieldin']) {
+
+                                $pingoutput = shell_exec("ping -c 10 '$hostin'");
+
+                                echo "<pre><h1>Ping:</h1><br>
+
+                                $pingoutput<br></pre>";
+
+                                /*$emailtestoutput = shell_exec("telnet '$hostin' 25; EHLO spectroweb.com; VRFY );*/
+
+                                }
+
+                                else { }
+                                break;
+}
+
+?>		
+
+	</div>
+
+</bodY>
 
