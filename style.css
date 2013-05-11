@@ -1,7 +1,7 @@
-.column-center {margin:0px auto; width:50%; overflow:hidden;}
+.column-center {font-family: Arial, Helvetica, sans-serif; margin:0px auto; width:50%; overflow:hidden;}
 
 .column-left {float:left; margin:0; width:20%;}
 
 .column-right {float:right; margin:0; width:20%;}
 
-glowing-border {border: 2px solid #4195fc;border-radius: 6px;}
+// glowing-border {border: 2px solid #4195fc;border-radius: 6px;}
