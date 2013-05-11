@@ -3,9 +3,6 @@
 <center>
 		<br>
 		<br>
-	<img src="http://www.hostway.com/images/global/logo.gif"></img>
-		<br>
-		<br>
 </center>
 </head>
 <body>
