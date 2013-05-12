@@ -7,22 +7,21 @@
 </head>
 <body>
 	<div class="column-center">
-		<div style="text-align:center; font-family: Arial, Helvetica, sans-serif;">
-		<p><h3>DNS, WHOIS and Ping for any domain or IP address</h3></p>
-				<br/>
+		<div class="maintxt" style="text-align: center;">
+		<p><h3>DNS, PTR, WHOIS and Ping for any domain or IP address</h3></p>
+		</div>			
+	<br>
 			<hr>
-			<form name="input" method="get">
-				<div style="text-align: left; font-family: Arial, Helvetica, sans-serif; margin-left: 35%;">	
+			<form name="input" method="get" style="text-align: left; margin-left: 35%;">
 					<input type="radio" name="group1" value="alltools" checked> All Webtools<br>
-					<input type="radio" name="group1" value="dns"> DNS & PTR lookup<br>
+					<input type="radio" name="group1" value="dns"> DNS & PTR<br>
 					<input type="radio" name="group1" value="whois"> WHOIS<br>
 					<input type="radio" name="group1" value="ping"> Ping<br>
-				</div>
-				<br>
-				<input type="text" style="width: 300px; font-family: Arial, Helvetica, sans-serif; placeholder="Domain or IP" name="fieldin">
+			<br>	
+				<input type="text" style="margin-left: -25%; width: 300px;" placeholder="Domain or IP" name="fieldin">
 				<input type="submit" value="Submit">
 			</form>
-		</div>
+			<hr>
 <?php	
 	$radioselect = $_GET['group1'];
 		
@@ -34,24 +33,29 @@
 
 				$dnsoutput = shell_exec(escapeshellcmd("host -a '$hostin'"));
 
-				echo "<pre><h1>DNS:</h1><br>
-	
-				$dnsoutput<br></pre>";	
+				echo "<h3>DNS & PTR&#58;</h3></ br>
+
+				<pre>$dnsoutput</pre>";	
 	
 				$whoisoutput = shell_exec(escapeshellcmd("whois '$hostin'"));
 
-				echo "<pre><h1>WHOIS:</h1><br>
+				echo "<h3>WHOIS&#58;</h3></ br>
 			
-				$whoisoutput</pre>";
-			
+				<pre>$whoisoutput</pre>";
 				
 				$pingoutput = shell_exec(escapeshellcmd("ping -c 4 '$hostin'"));
 
-				echo "<pre><h1>Ping:</h1><br>
+				echo "<h3>Ping&#58;</h3></ br>
 
-				$pingoutput<br></pre>";
+				<pre>$pingoutput</pre>";
 
 				}		
+					
+				else {
+
+                                echo 'You did not submit a valid domain or IP address';
+
+                                        }
 		
 				break;
 		
@@ -61,12 +65,19 @@
  
 			        $dnsoutput = shell_exec(escapeshellcmd("host -a '$hostin'"));
   
-                                echo "<pre><h1>DNS:</h1><br/>
+                                echo "<h3>DNS &amp; PTR&#58;</h3></ br/>
  
-                                $dnsoutput<br/></pre>";
+                                <pre>$dnsoutput</pre>";
  
                                 }
-                                break;
+                       
+				else {
+
+                                echo 'You did not submit a valid domain or IP address';
+
+                                        }
+
+			        break;
 			
 			case "whois":
 					
@@ -74,11 +85,18 @@
 	
 				$whoisoutput = shell_exec(escapeshellcmd("whois '$hostin'"));
 
-                                echo "<pre><h1>WHOIS:</h1><br>
+                                echo "<h3>WHOIS&#58;</h3></ br>
 
-                                $whoisoutput</pre>";
+                                <pre>$whoisoutput</pre>";
 
 				}				
+				
+				else {
+
+                                echo 'You did not submit a valid domain or IP address';
+
+                                        }
+
 
                                 break;
 			
@@ -89,18 +107,23 @@
 
                                 $pingoutput = shell_exec(escapeshellcmd("ping -c 4 '$hostin'"));
 
-                                echo "<pre><h1>Ping:</h1><br>
+                                echo "<h3>Ping&#58;</h3></ br>
+ 
+				<pre>$pingoutput</pre>";
 
-                                $pingoutput<br></pre>";
-
-
+				
                                 }
 
-                                break;
+                                else {
+					
+				echo 'You did not submit a valid domain or IP address';
+					 
+					}
+				break;
 }
 
 ?>		
-
 	</div>
 
 </body>
+
