@@ -1,7 +1,9 @@
-.column-center {font-family: Arial, Helvetica, sans-serif; margin:0px auto; width:50%; overflow:hidden;}
+.column-center {margin:0px auto; width:50%; overflow: visible; font-family: Arial, Helvetica, sans-serif; word-wrap: break-word;}
 
-.column-left {float:left; margin:0; width:20%;}
+.column-left {float:left; margin:0; width:20%; overflow: visible; word-wrap: break-word;}
 
-.column-right {float:right; margin:0; width:20%;}
+.column-right {float:right; margin:0; width:20%; overflow: visible; word-wrap: break-word;}
+
+.maintxt {font-family: Arial, Helvetica, sans-serif;}
 
 // glowing-border {border: 2px solid #4195fc;border-radius: 6px;}
