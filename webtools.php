@@ -5,124 +5,207 @@
 		<br>
 </center>
 </head>
+
 <body>
 	<div class="column-center">
-		<div class="maintxt" style="text-align: center;">
-		<p><h3>DNS, PTR, WHOIS and Ping for any domain or IP address</h3></p>
-		</div>			
-	<br>
+		<div style="text-align:center; font-family: Arial, Helvetica, sans-serif;">
+		<p><h3>Webtools checks for hosts via domain or IP address</h3></p>
+				<br/>
 			<hr>
-			<form name="input" method="get" style="text-align: left; margin-left: 35%;">
-					<input type="radio" name="group1" value="alltools" checked> All Webtools<br>
-					<input type="radio" name="group1" value="dns"> DNS & PTR<br>
+			<form name="input" method="get">
+				<div style="text-align: left; font-family: Arial, Helvetica, sans-serif; margin-left: 35%;">	
+					<input type="radio" name="group1" value="dns" checked> DNS<br>
 					<input type="radio" name="group1" value="whois"> WHOIS<br>
 					<input type="radio" name="group1" value="ping"> Ping<br>
-			<br>	
-				<input type="text" style="margin-left: -25%; width: 300px;" placeholder="Domain or IP" name="fieldin">
-				<input type="submit" value="Submit">
+					<input type="radio" name="group1" value="rbl"> RBL Email Blacklist Check: only for IP addresses<br>
+                                        <input type="radio" name="group1" value="portscanwell"> Well Known Ports Scan: 1 to 1023<br>
+                                	<input type="radio" name="group1" value="portscanreg"> Registered Ports Scan: 1024 to 65535 - output within 2 minute<br>
+					<input type="radio" name="group1" value="allports"> All Ports Scan: 1 to 65535 - output within 2 minutes<br>
+					<input type="radio" name="group1" value="alltools"> One Click Webtools - output within 2 minutes<br>
+                                 <br>
+				</div>
+			<hr><br>
+                                 <input type="text" style="width: 300px; font-family: Arial, Helvetica, sans-serif; placeholder="Domain or IP" name="fieldin">
+                        	 <input type="submit" value="Submit">
 			</form>
-			<hr>
+			<br>
+
+
+
+		</div>
 <?php	
-	$radioselect = $_GET['group1'];
+	$radioselect = htmlspecialchars($_GET['group1']);
 		
 		switch($radioselect) {
 	
 			case "alltools": 
 
-				if ($hostin = $_GET['fieldin']) {
+				if ($hostin = htmlspecialchars($_GET['fieldin'])) {
 
 				$dnsoutput = shell_exec(escapeshellcmd("host -a '$hostin'"));
 
-				echo "<h3>DNS & PTR&#58;</h3></ br>
-
-				<pre>$dnsoutput</pre>";	
+				echo "<pre><h1>DNS:</h1><br>
+	
+				$dnsoutput<br></pre>";	
 	
 				$whoisoutput = shell_exec(escapeshellcmd("whois '$hostin'"));
 
-				echo "<h3>WHOIS&#58;</h3></ br>
+				echo "<pre><h1>WHOIS:</h1><br>
 			
-				<pre>$whoisoutput</pre>";
-				
+				$whoisoutput</pre>";
+			
 				$pingoutput = shell_exec(escapeshellcmd("ping -c 4 '$hostin'"));
 
-				echo "<h3>Ping&#58;</h3></ br>
+				echo "<pre><h1>Ping:</h1><br>
 
-				<pre>$pingoutput</pre>";
+				$pingoutput<br></pre>";
 
+				$alloutput = shell_exec(escapeshellcmd("nmap -PN -p1-65535 '$hostin'"));
+
+                                echo "<pre><h1>All Open Ports:</h1><br>
+
+                                $alloutput<br></pre>";
+	
 				}		
-					
-				else {
+				
+				else echo 'Enter a domain or IP address';
 
-                                echo 'You did not submit a valid domain or IP address';
-
-                                        }
-		
 				break;
 		
 			case "dns":
 
-				if ($hostin = $_GET['fieldin']) {
+				if ($hostin = htmlspecialchars($_GET['fieldin'])) {
  
 			        $dnsoutput = shell_exec(escapeshellcmd("host -a '$hostin'"));
   
-                                echo "<h3>DNS &amp; PTR&#58;</h3></ br/>
+                                echo "<pre><h1>DNS:</h1><br/>
  
-                                <pre>$dnsoutput</pre>";
+                                $dnsoutput<br/></pre>";
  
                                 }
-                       
-				else {
 
-                                echo 'You did not submit a valid domain or IP address';
-
-                                        }
-
-			        break;
+				else echo 'Enter a domain or IP address';
+ 
+                                break;
 			
 			case "whois":
 					
-				if ($hostin = $_GET['fieldin']) {
+				if ($hostin = htmlspecialchars($_GET['fieldin'])) {
 	
 				$whoisoutput = shell_exec(escapeshellcmd("whois '$hostin'"));
 
-                                echo "<h3>WHOIS&#58;</h3></ br>
+                                echo "<pre><h1>WHOIS:</h1><br>
 
-                                <pre>$whoisoutput</pre>";
+                                $whoisoutput</pre>";
 
 				}				
 				
-				else {
-
-                                echo 'You did not submit a valid domain or IP address';
-
-                                        }
-
-
+				else echo 'Enter a domain or IP address';				
+				
                                 break;
-			
 
 			case "ping":
 
-				if ($hostin = $_GET['fieldin']) {
+				if ($hostin = htmlspecialchars($_GET['fieldin'])) {
 
                                 $pingoutput = shell_exec(escapeshellcmd("ping -c 4 '$hostin'"));
 
-                                echo "<h3>Ping&#58;</h3></ br>
- 
-				<pre>$pingoutput</pre>";
+                                echo "<pre><h1>Ping:</h1><br>
 
+                                $pingoutput<br></pre>";
+
+
+                                }
 				
+				else echo 'Enter a domain or IP address';
+
+                                break;
+
+
+                        case "rbl":
+
+                                if ($hostin = htmlspecialchars($_GET['fieldin'])) {
+
+                                $rbloutput = shell_exec(escapeshellcmd("rblcheck -c -t 
+											-s psbl.surriel.com 
+											-s dnsbl.njabl.org 
+                     									-s zen.spamhaus.org 
+               									  	-s bl.spamcop.net  
+                     									-s spam.dnsbl.sorbs.net 
+                     									-s combined.rbl.msrbl.net 
+                     									-s dnsbl.sorbs.net 
+                     									-s b.barracudacentral.org 
+                     									-s dnsbl.ahbl.org 
+                     									-s dnsbl-1.uceprotect.net '$hostin'"));
+
+                                echo "<pre><h1>RBL Blacklists:</h1><br>
+
+                                $rbloutput<br></pre>";
+
+
                                 }
 
-                                else {
-					
-				echo 'You did not submit a valid domain or IP address';
-					 
-					}
-				break;
+                                else echo 'Enter a domain or IP address';
+
+                                break; 
+
+			case "portscanwell":
+
+				if ($hostin = htmlspecialchars($_GET['fieldin'])) {
+
+                                $welloutput = shell_exec(escapeshellcmd("nmap -PN -p1-1023 '$hostin'"));
+				
+                                echo "<pre><h1>Well Known Ports Open:</h1><br>
+				
+				$welloutput<br></pre>";
+
+                                }
+
+                                else echo 'Enter a domain or IP address';
+
+                                break;
+
+                       case "portscanreg":
+
+                                if ($hostin = htmlspecialchars($_GET['fieldin'])) {
+
+                                $regoutput = shell_exec(escapeshellcmd("nmap -PN -p1024-65535 '$hostin'"));
+
+                                echo "<pre><h1>All Open Ports:</h1><br>
+		
+				$regoutput<br></pre>";
+
+
+                                }
+
+                                else echo 'Enter a domain or IP address';
+
+                                break;
+
+
+
+			case "allports":
+
+                                if ($hostin = htmlspecialchars($_GET['fieldin'])) {
+
+                                $alloutput = shell_exec(escapeshellcmd("nmap -PN -p1-65535 '$hostin'"));
+
+                                echo "<pre><h1>All Open Ports:</h1><br>
+
+                                $alloutput<br></pre>";
+                               
+
+                                }
+
+                                else echo 'Enter a domain or IP address';
+
+                                break;
+
+
 }
 
 ?>		
+
 	</div>
 
 </body>
