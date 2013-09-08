@@ -1,7 +1,9 @@
 webtools
 ========
 
-A domain and host IP address web tool - PHP/HTML.  DNS, whois, ping, port scan
+A domain and host IP address web tool written with PHP, HTML and CSS.  
+
+Tools include lookups for DNS, whois, ping, rbl blacklist check and port scan
 
 Requirements:
 
