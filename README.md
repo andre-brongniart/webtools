@@ -7,10 +7,4 @@ Tools include lookups for DNS, whois, ping, rbl blacklist check and port scan
 
 Requirements:
 
-Linux OS
-PHP
-Apache
-rblcheck - http://linux.die.net/man/1/rblcheck
-whois
-host
-nmap
+Linux OS, PHP, Apache or other web server, whois, host, nmap, and rblcheck - http://linux.die.net/man/1/rblcheck.
